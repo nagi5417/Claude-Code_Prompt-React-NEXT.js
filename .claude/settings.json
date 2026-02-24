@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(pnpm test:*)",
+      "Bash(pnpm build)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm format)",
+      "Bash(npx tsc:*)",
+      "Bash(npx prisma:*)",
+      "Bash(git add:*)",
+      "Bash(git status:*)",
+      "Bash(git commit:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(gh:*)",
+      "Read",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push origin master:*)",
+      "Bash(npx prisma migrate reset:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Write(.env*)",
+      "Write(package-lock.json)",
+      "DeleteFile(src/*)",
+      "DeleteFile(.env*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import json,sys;d=json.load(sys.stdin);p=d.get('tool_input',{}).get('file_path','');sys.exit(2 if any(x in p for x in ['.env','package-lock.json','.git/','node_modules/']) else 0)\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(jq -r \".tool_input.command\" <<< \"$(cat)\"); if echo \"$CMD\" | grep -qE \"^git push.*(main|master)\"; then echo \"main/masterへの直接pushはブロックされています\" >&2; exit 2; fi; exit 0'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // empty\" <<< \"$(cat)\"); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx|json|css|md)$\"; then npx prettier --write \"$FILE\" 2>/dev/null; fi; exit 0'",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // empty\" <<< \"$(cat)\"); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx)$\"; then npx eslint --fix \"$FILE\" 2>/dev/null; fi; exit 0'",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'npx tsc --noEmit 2>&1 | head -30; exit 0'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+# Claude Code — personal settings
+.claude/settings.local.json
+.claude/hooks/local/
+.claude/commands/local/
+
+# Temporary artifacts
+compass_artifact_wf-*.md
+
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
