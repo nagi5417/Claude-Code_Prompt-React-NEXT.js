@@ -39,5 +39,6 @@ Next.js 15 App Router + TypeScript strict + Prisma ORM + Tailwind CSS のモノ�
 
 - IMPORTANT: Server Components をデフォルトで使用。`'use client'` は必要な場合のみ付与
 - IMPORTANT: App Router の動的パラメータ（params）は Promise であり、await が必要
+- IMPORTANT: Server Component からデータを取得する場合は `fetch` で自分の API Route を呼ばず、Prisma を直接使用する。`fetch` 経由だとポート番号の問題が発生する
 - .env ファイルは絶対にコミットしない
 - DB スキーマの詳細は @prisma/schema.prisma を参照
