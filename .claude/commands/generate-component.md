@@ -34,8 +34,11 @@ export function $ARGUMENTS({ ...props }: ${ARGUMENTS}Props) {
 - Vitest + React Testing Library を使用
 - 基本レンダリング、Props 変更、ユーザーインタラクション、エッジケースをカバー
 
-### 3. index.stories.tsx — Storybook ストーリー
+### 3. index.stories.tsx — Storybook ストーリー（条件付き）
 
+- Only generate `index.stories.tsx` if Storybook is installed/configured in this repository.
+  - If not sure, search for `.storybook/` directory or a `storybook` script in `package.json`.
+  - If Storybook is not found, skip this step entirely.
 - `@storybook/nextjs` フレームワークを使用
 - Default、各バリアント、各状態（loading, error, empty）のストーリーを生成
 - `satisfies Meta<typeof $ARGUMENTS>` で型安全に
