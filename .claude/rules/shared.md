@@ -23,3 +23,25 @@
 - 公開関数には JSDoc コメント
 - 複雑なロジックにはインラインコメント
 - コードが自明な箇所にはコメント不要（自己文書化を優先）
+
+## Gate: Ask before implementing
+
+If any of the following are unclear, stop and ask questions before coding:
+
+- API input/output shape is not specified
+- Error handling and status codes are not specified
+- AuthZ/authentication requirements are unclear
+- Data integrity rules (unique constraints, delete policy) are unclear
+
+## Definition of Done (minimum)
+
+UI changes must include:
+
+- loading / empty / error states
+- typecheck passes
+
+API changes must include:
+
+- validation for inputs
+- consistent error shape and status codes
+- at least 2 negative cases considered (and ideally tested)
