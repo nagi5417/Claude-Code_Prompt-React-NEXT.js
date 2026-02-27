@@ -3,6 +3,8 @@ description: 要件を調査し、実装方針を文書化
 argument-hint: <task-description>
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 # 調査フェーズ
 
 ## 入力: $ARGUMENTS

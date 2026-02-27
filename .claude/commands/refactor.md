@@ -3,6 +3,8 @@ description: 指定ファイル/モジュールのリファクタリング
 argument-hint: <file-path-or-directory>
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 ## リファクタリング対象: $ARGUMENTS
 
 @$ARGUMENTS を分析し、以下の改善を実施してください。

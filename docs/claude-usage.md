@@ -8,11 +8,9 @@
 
 ```
 .claude/
-├── agents/                    # サブエージェント定義（7件）
+├── agents/                    # サブエージェント定義（5件）
 │   ├── accessibility-auditor.md
-│   ├── backend-api.md
 │   ├── code-reviewer.md
-│   ├── frontend-dev.md
 │   ├── performance-auditor.md
 │   ├── security-auditor.md
 │   └── test-engineer.md
@@ -270,31 +268,7 @@ GitHub PR を作成します。引数は不要です。
 
 エージェントは特定の専門知識を持つサブプロセスで、Claude Code が必要に応じて自動的に委任します。手動で呼び出す場合はプロンプトで指示します。
 
-### 開発系
-
-#### frontend-dev
-
-React / Next.js のフロントエンド実装を担当します。
-
-- **モデル:** sonnet
-- **得意領域:** Server Components、Client Components の使い分け、Tailwind スタイリング、フォーム実装（Server Actions + useActionState）
-- **使いどころ:** コンポーネント実装、ページ作成、レイアウト修正
-
-```
-フロントエンドエージェントにヘッダーコンポーネントの実装を委任して
-```
-
-#### backend-api
-
-Next.js API ルートと Prisma を使ったバックエンド実装を担当します。
-
-- **モデル:** sonnet
-- **得意領域:** REST API 設計、Zod バリデーション、Prisma クエリ最適化（N+1 防止）、トランザクション管理
-- **使いどころ:** API エンドポイント実装、DB スキーマ変更、ミドルウェア実装
-
-```
-バックエンドエージェントにユーザー API の実装を委任して
-```
+> **Note:** フロントエンド・バックエンドの開発タスクは `rules/frontend.md` と `rules/backend.md` で十分カバーされるため、専用エージェントは設けていません。コンポーネント作成は `/generate-component`、API ルート作成は `/generate-api-route` コマンドを使用してください。
 
 ### テスト系
 
@@ -365,13 +339,12 @@ OWASP Top 10 に基づくセキュリティ監査を実施します。
 
 `settings.json` に定義されたフックにより、以下の自動化が実行されます。
 
-### PostToolUse: Prettier 自動フォーマット
+### PostToolUse: Prettier 自動フォーマット + ESLint 自動修正
 
-ファイル編集後、対象ファイル（`.ts`, `.tsx`, `.js`, `.jsx`, `.json`, `.css`, `.md`）に `npx prettier --write` が自動実行されます。
+ファイル編集後、1つの統合フックで以下が順番に自動実行されます:
 
-### PostToolUse: ESLint 自動修正
-
-ファイル編集後、対象ファイル（`.ts`, `.tsx`, `.js`, `.jsx`）に `npx eslint --fix` が自動実行されます。
+1. 対象ファイル（`.ts`, `.tsx`, `.js`, `.jsx`, `.json`, `.css`, `.md`）に `npx prettier --write`
+2. 対象ファイル（`.ts`, `.tsx`, `.js`, `.jsx`）に `npx eslint --fix`
 
 ### PreToolUse: 保護対象ファイルのブロック
 
@@ -474,7 +447,7 @@ Claude Code のセッション終了時に `npx tsc --noEmit` が実行され、
 ```
 1. 調査       /investigate ユーザープロフィール編集機能
 2. 計画       /plan ユーザープロフィール編集機能
-3. 実装       フロントエンドエージェントとバックエンドエージェントに委任
+3. 実装       Claude Code 本体に直接依頼、または /generate-component / /generate-api-route を使用
 4. テスト     /generate-test と /generate-e2e でテスト生成
 5. レビュー   /review で差分レビュー
 6. コミット   /commit で Conventional Commits 形式のコミット

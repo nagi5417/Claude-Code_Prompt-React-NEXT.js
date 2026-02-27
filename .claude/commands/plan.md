@@ -3,6 +3,8 @@ description: 調査結果に基づく実装計画を策定
 argument-hint: <task-description>
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 # 実装計画フェーズ
 
 ## 入力: $ARGUMENTS

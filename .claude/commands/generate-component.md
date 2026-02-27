@@ -3,6 +3,8 @@ description: React コンポーネントを規約に沿って生成
 argument-hint: <ComponentName>
 ---
 
+<!-- 🟡 半汎用: React系プロジェクトで使える -->
+
 ## コンポーネント: $ARGUMENTS
 
 以下の規約に従い `src/components/$ARGUMENTS/` ディレクトリを作成し、必要なファイルを生成してください。
@@ -49,7 +51,9 @@ export function $ARGUMENTS({ ...props }: ${ARGUMENTS}Props) {
 export { $ARGUMENTS } from "./index";
 ```
 
-### 生成後の検証
+### 完了条件（すべて満たすまで完了としない）
 
-- `pnpm lint` でリントチェック
-- `pnpm test -- --run src/components/$ARGUMENTS` でテスト実行
+- [ ] コンポーネントが正しくレンダリングされる
+- [ ] `pnpm lint` がエラーなし
+- [ ] `npx tsc --noEmit` がエラーなし
+- [ ] `pnpm test -- --run src/components/$ARGUMENTS` で全テストパス

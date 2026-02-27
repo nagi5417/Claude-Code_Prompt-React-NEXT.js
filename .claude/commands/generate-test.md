@@ -4,6 +4,8 @@ argument-hint: <file-path>
 allowed-tools: Read, Grep, Glob, Bash(pnpm test:*)
 ---
 
+<!-- 🟡 半汎用: テストツール名を変更すれば使える -->
+
 ## テスト対象: $ARGUMENTS
 
 対象ファイル @$ARGUMENTS を読み込み、包括的なユニットテストを生成してください。
@@ -33,7 +35,9 @@ allowed-tools: Read, Grep, Glob, Bash(pnpm test:*)
    - 存在しないリソース（404）
    - サーバーエラー（500）
 
-### 生成後
+### 完了条件（すべて満たすまで完了としない）
 
-- `pnpm test -- --run $ARGUMENTS` でテスト実行
-- 失敗するテストがあれば修正
+- [ ] テストファイルが対象ファイルと同階層に作成されている
+- [ ] `pnpm test -- --run $ARGUMENTS` で全テストパス
+- [ ] 正常系・異常系の両方がカバーされている
+- [ ] `npx tsc --noEmit` がエラーなし

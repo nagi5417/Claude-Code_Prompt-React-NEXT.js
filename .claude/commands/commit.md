@@ -3,6 +3,8 @@ description: Conventional Commits 形式でコミットメッセージを生成
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*)
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 ## コンテキスト
 
 - git status: !`git status --short`

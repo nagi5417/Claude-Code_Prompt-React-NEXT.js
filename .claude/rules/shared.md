@@ -1,3 +1,5 @@
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 # 共通コーディング規約
 
 ## TypeScript
@@ -24,24 +26,32 @@
 - 複雑なロジックにはインラインコメント
 - コードが自明な箇所にはコメント不要（自己文書化を優先）
 
-## Gate: Ask before implementing
+## Gate: 実装前の確認事項
 
-If any of the following are unclear, stop and ask questions before coding:
+以下が不明確な場合、コーディングを開始せず質問すること：
 
-- API input/output shape is not specified
-- Error handling and status codes are not specified
-- AuthZ/authentication requirements are unclear
-- Data integrity rules (unique constraints, delete policy) are unclear
+- API の入出力形式が未定義
+- エラーハンドリングとステータスコードが未指定
+- 認証・認可の要件が不明確
+- データ整合性ルール（ユニーク制約、削除ポリシー）が不明確
 
-## Definition of Done (minimum)
+## 完了の定義（最低条件）
 
-UI changes must include:
+UI の変更には以下を含むこと：
 
-- loading / empty / error states
-- typecheck passes
+- loading / empty / error 各状態の処理
+- 型チェック通過（`npx tsc --noEmit`）
 
-API changes must include:
+API の変更には以下を含むこと：
 
-- validation for inputs
-- consistent error shape and status codes
-- at least 2 negative cases considered (and ideally tested)
+- 入力のバリデーション
+- 統一エラー形式とステータスコード
+- 最低2つの異常系ケースの考慮（理想的にはテスト付き）
+
+## エラー発生時の対応方針
+
+- 型エラー（tsc）: 自力で修正を試みる（最大3回まで）
+- テスト失敗: テストコード側の修正は OK。実装コードの変更が必要な場合はユーザーに確認
+- lint エラー: `eslint --fix` で自動修正。手動修正が必要な場合は対応する
+- ビルドエラー: エラー内容を報告し、修正方針を提案してからユーザーに確認
+- 3回試しても解決しない場合: エラーログを貼り付けてユーザーに報告する

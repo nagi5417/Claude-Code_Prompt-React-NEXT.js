@@ -63,12 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // empty\" <<< \"$(cat)\"); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx|json|css|md)$\"; then npx prettier --write \"$FILE\" 2>/dev/null; fi; exit 0'",
-            "timeout": 15
-          },
-          {
-            "type": "command",
-            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // empty\" <<< \"$(cat)\"); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx)$\"; then npx eslint --fix \"$FILE\" 2>/dev/null; fi; exit 0'",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // empty\" <<< \"$(cat)\"); if [ -n \"$FILE\" ]; then if echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx|json|css|md)$\"; then npx prettier --write \"$FILE\" 2>/dev/null; fi; if echo \"$FILE\" | grep -qE \"\\.(ts|tsx|js|jsx)$\"; then npx eslint --fix \"$FILE\" 2>/dev/null; fi; fi; exit 0'",
             "timeout": 15
           }
         ]
