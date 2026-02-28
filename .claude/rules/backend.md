@@ -6,6 +6,8 @@ paths:
   - "middleware.ts"
 ---
 
+<!-- 🔴 プロジェクト固有: Prisma/PostgreSQL 依存 -->
+
 # バックエンド開発規約
 
 ## API Route Handler

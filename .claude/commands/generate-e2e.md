@@ -3,6 +3,8 @@ description: Playwright で E2E テストを生成
 argument-hint: <feature-name> (例: auth-flow, checkout)
 ---
 
+<!-- 🟡 半汎用: テストツール名を変更すれば使える -->
+
 ## E2E テスト: $ARGUMENTS
 
 `tests/e2e/$ARGUMENTS.spec.ts` に Playwright E2E テストを生成してください。

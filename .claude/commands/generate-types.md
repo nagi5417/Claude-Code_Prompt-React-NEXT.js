@@ -3,6 +3,8 @@ description: APIレスポンスやフォームの型定義を生成
 argument-hint: <domain-name> (例: user, product, order)
 ---
 
+<!-- 🔴 プロジェクト固有: Prisma + Zod 依存 -->
+
 ## 型定義: $ARGUMENTS
 
 `src/types/$ARGUMENTS.ts` に型定義ファイルを生成してください。
