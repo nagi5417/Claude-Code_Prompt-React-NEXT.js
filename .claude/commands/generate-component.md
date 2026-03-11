@@ -51,9 +51,25 @@ export function $ARGUMENTS({ ...props }: ${ARGUMENTS}Props) {
 export { $ARGUMENTS } from "./index";
 ```
 
-### 完了条件（すべて満たすまで完了としない）
+### 生成後の検証と修正ループ
 
-- [ ] コンポーネントが正しくレンダリングされる
-- [ ] `pnpm lint` がエラーなし
-- [ ] `npx tsc --noEmit` がエラーなし
-- [ ] `pnpm test -- --run src/components/$ARGUMENTS` で全テストパス
+1. `pnpm lint` でリントチェック → エラーがあれば修正
+2. `pnpm test -- --run src/components/$ARGUMENTS` でテスト実行
+3. テストが失敗した場合:
+   - 失敗原因を分析
+   - コンポーネントまたはテストを修正
+   - 再度テスト実行
+   - 全テスト通過するまで繰り返す（最大3回）
+4. `npx tsc --noEmit` で型チェック → エラーがあれば修正
+5. すべて通過したら完了を報告
+
+### 成功時の期待出力
+
+生成完了後、以下の状態になっていること:
+
+- `src/components/$ARGUMENTS/index.tsx` が存在し、named export されている
+- `src/components/$ARGUMENTS/index.test.tsx` が存在し、テストが通過している
+- `src/components/$ARGUMENTS/index.ts` がバレルエクスポートとして存在
+- Storybook がインストールされている場合のみ `index.stories.tsx` が存在
+- `pnpm lint` がエラーなし
+- `npx tsc --noEmit` がエラーなし

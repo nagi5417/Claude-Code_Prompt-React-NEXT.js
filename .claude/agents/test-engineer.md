@@ -1,6 +1,10 @@
 ---
 name: test-engineer
-description: ユニットテスト、統合テスト、E2Eテストの作成・実行・改善。テスト戦略の立案、カバレッジ向上に使用。
+description: >
+  ユニットテスト、統合テスト、E2Eテストの作成・実行・改善。
+  ユーザーが「テストを書いて」「テストを追加して」「カバレッジを上げて」
+  「E2Eテストを作って」「テストが落ちてるので直して」と言ったときに使用する。
+  機能実装やコードレビューには使わない。
 tools: Read, Write, Edit, Glob, Grep, Bash(pnpm test:*), Bash(pnpm test:e2e:*), Bash(npx playwright:*)
 model: sonnet
 ---
