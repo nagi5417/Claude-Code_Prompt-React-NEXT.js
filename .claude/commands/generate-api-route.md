@@ -80,10 +80,23 @@ export async function POST(request: NextRequest) {
 
 `app/api/v1/$ARGUMENTS/[id]/route.ts` も同時に生成し、GET（単一取得）、PUT（更新）、DELETE（削除）を実装してください。
 
-### 完了条件（すべて満たすまで完了としない）
+### 生成後の検証と修正ループ
 
-- [ ] `app/api/v1/$ARGUMENTS/route.ts` が生成されている
-- [ ] `app/api/v1/$ARGUMENTS/[id]/route.ts` が生成されている
-- [ ] Zod スキーマが Prisma モデルのフィールドと整合している
-- [ ] `npx tsc --noEmit` がエラーなし
-- [ ] `pnpm build` が成功する
+1. `npx tsc --noEmit` で型チェック → エラーがあれば修正
+2. `pnpm build` でビルド確認 → エラーがあれば修正
+3. エラーが解消しない場合:
+   - 原因を分析
+   - コードを修正
+   - 再実行
+   - 通過するまで繰り返す（最大3回）
+4. すべて通過したら完了を報告
+
+### 成功時の期待出力
+
+生成完了後、以下の状態になっていること:
+
+- `app/api/v1/$ARGUMENTS/route.ts` が存在し、GET（一覧+ページネーション）と POST（Zod バリデーション付き）が実装されている
+- `app/api/v1/$ARGUMENTS/[id]/route.ts` が存在し、GET / PUT / DELETE が実装されている
+- 統一エラーレスポンス形式（`lib/api-error.ts`）を使用している
+- `npx tsc --noEmit` がエラーなし
+- `pnpm build` が成功
