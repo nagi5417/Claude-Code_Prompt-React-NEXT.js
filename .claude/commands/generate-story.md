@@ -3,6 +3,8 @@ description: コンポーネントの Storybook ストーリーを生成
 argument-hint: <component-path>
 ---
 
+<!-- 🟡 半汎用: React系プロジェクトで使える -->
+
 ## Storybook: $ARGUMENTS
 
 @$ARGUMENTS のコンポーネントを読み込み、Storybook ストーリーを生成してください。

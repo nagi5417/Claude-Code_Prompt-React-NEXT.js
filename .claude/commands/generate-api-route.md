@@ -3,9 +3,18 @@ description: Next.js API Route Handler を生成
 argument-hint: <resource-name> (例: users, products)
 ---
 
+<!-- 🔴 プロジェクト固有: Next.js + Prisma 依存 -->
+
 ## API Route: /api/v1/$ARGUMENTS
 
 `app/api/v1/$ARGUMENTS/route.ts` に Next.js Route Handler を生成してください。
+
+### 手順
+
+1. `prisma/schema.prisma` を読み込み、対象モデル（$ARGUMENTS に対応する Prisma モデル）を特定する
+2. リソース名（$ARGUMENTS）と Prisma モデル名の対応を確認する（例: `users` → Prisma の `user`）
+3. モデルのフィールド定義に基づいて Zod スキーマを作成する
+4. 以下のテンプレートを参考に実装する（そのままコピーではなく、実際のモデルに合わせる）
 
 ### 規約
 
@@ -71,7 +80,23 @@ export async function POST(request: NextRequest) {
 
 `app/api/v1/$ARGUMENTS/[id]/route.ts` も同時に生成し、GET（単一取得）、PUT（更新）、DELETE（削除）を実装してください。
 
-### 生成後の検証
+### 生成後の検証と修正ループ
 
-- `npx tsc --noEmit` で型チェック
-- `pnpm build` でビルド確認
+1. `npx tsc --noEmit` で型チェック → エラーがあれば修正
+2. `pnpm build` でビルド確認 → エラーがあれば修正
+3. エラーが解消しない場合:
+   - 原因を分析
+   - コードを修正
+   - 再実行
+   - 通過するまで繰り返す（最大3回）
+4. すべて通過したら完了を報告
+
+### 成功時の期待出力
+
+生成完了後、以下の状態になっていること:
+
+- `app/api/v1/$ARGUMENTS/route.ts` が存在し、GET（一覧+ページネーション）と POST（Zod バリデーション付き）が実装されている
+- `app/api/v1/$ARGUMENTS/[id]/route.ts` が存在し、GET / PUT / DELETE が実装されている
+- 統一エラーレスポンス形式（`lib/api-error.ts`）を使用している
+- `npx tsc --noEmit` がエラーなし
+- `pnpm build` が成功

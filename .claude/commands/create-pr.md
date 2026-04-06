@@ -3,6 +3,8 @@ description: GitHub PR を作成
 allowed-tools: Bash(git *), Bash(gh *)
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 ## コンテキスト
 
 - ブランチ: !`git branch --show-current`

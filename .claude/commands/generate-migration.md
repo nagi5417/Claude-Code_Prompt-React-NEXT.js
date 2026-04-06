@@ -3,6 +3,8 @@ description: Prisma マイグレーションを生成
 argument-hint: <migration-description> (例: add-user-avatar)
 ---
 
+<!-- 🔴 プロジェクト固有: Prisma 依存 -->
+
 ## マイグレーション: $ARGUMENTS
 
 ### 手順

@@ -3,6 +3,8 @@ description: 調査結果に基づく実装計画を策定
 argument-hint: <task-description>
 ---
 
+<!-- 🔵 汎用: どのプロジェクトでも使える -->
+
 # 実装計画フェーズ
 
 ## 入力: $ARGUMENTS
@@ -15,9 +17,19 @@ argument-hint: <task-description>
 4. 各タスクの実装順序を決定
 5. リスクと対策を明記
 
+## Output filename rule
+
+- Save output to: `docs/plan/YYYYMMDD_HHMM_<slug>.md`
+- slug is derived from $ARGUMENTS:
+  - lowercase
+  - spaces → `-`
+  - remove or replace `/ \ : * ? " < > |` with `-`
+  - trim repeated `-`
+- Example: `docs/plan/20260226_2301_auth-login.md`
+
 ## 出力
 
-`docs/plan/plan_$ARGUMENTS.md` に以下を記録:
+上記ルールに従ったファイルに以下を記録:
 
 ### 実装計画
 
