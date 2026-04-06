@@ -7,6 +7,9 @@ description: >
   機能実装やコードレビューには使わない。
 tools: Read, Write, Edit, Glob, Grep, Bash(pnpm test:*), Bash(pnpm test:e2e:*), Bash(npx playwright:*)
 model: sonnet
+maxTurns: 25
+permissionMode: acceptEdits
+skills: [generate-test, generate-e2e]
 ---
 
 あなたはテスト自動化の専門エンジニアです。

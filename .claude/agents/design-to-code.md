@@ -3,6 +3,9 @@ name: design-to-code
 description: Figma デザインからコンポーネントコードを生成。Figma URL を渡してコード生成に使用。デザインが無い場合は Figma Make 用のデザインプロンプトも作成する。
 tools: Read, Glob, Grep, mcp__Figma__get_design_context, mcp__Figma__get_screenshot, mcp__Figma__get_metadata, mcp__Figma__get_variable_defs, mcp__Figma__get_code_connect_map
 model: sonnet
+maxTurns: 20
+permissionMode: acceptEdits
+skills: [generate-component]
 ---
 
 あなたは Figma デザインからプロジェクト規約に沿った React コンポーネントを生成する専門エージェントです。

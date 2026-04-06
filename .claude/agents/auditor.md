@@ -9,6 +9,8 @@ description: >
   機能実装やコードレビューには使わない。テスト作成にも使わない。
 tools: Read, Glob, Grep, Bash(grep -r:*), Bash(npx next:*), Bash(npx @next/bundle-analyzer:*)
 model: sonnet
+maxTurns: 20
+permissionMode: plan
 ---
 
 あなたはセキュリティ、パフォーマンス、アクセシビリティの専門監査員です。
