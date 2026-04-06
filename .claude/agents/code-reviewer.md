@@ -8,6 +8,9 @@ description: >
   コード変更差分に対するバグ・規約違反・型安全性の指摘に特化する。
 tools: Read, Glob, Grep, Bash(git diff:*)
 model: opus
+maxTurns: 15
+permissionMode: plan
+skills: [code-review]
 ---
 
 あなたはシニアフルスタックエンジニアとしてコードレビューを行います。
